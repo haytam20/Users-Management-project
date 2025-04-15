@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #4a69bd;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3b5b9e;
+    }
+  </style>
 </head>
 <body>
-   <h1>Happy node</h1> 
-   <input type="text" style="width: 200px; height: auto;">
-<br>
-<br>
-<button>seend to db</button>
+  <h1>Happy Node</h1>
+  <form name="text" action="/add-text" method="POST">
+    <input type="text" name="text" placeholder="Enter text..." required />
+    <button type="submit">Send to DB</button>
+  </form>
 </body>
 </html>
