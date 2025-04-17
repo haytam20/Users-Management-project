@@ -28,13 +28,27 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // === MongoDB Model ===
-const Article = require('./models/Text');
+const User = require('./models/User');
 
 // === Routes ===
 app.get('/', (req, res) => res.render('index'));
 app.get('/user/add.html', (req, res) => res.render('user/add'));
 app.get('/user/view.html', (req, res) => res.render('user/view'));
 app.get('/user/edit.html', (req, res) => res.render('user/edit'));
+//post
+app.post('/user/add.html', async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.redirect('/user/view.html'); // ou une autre page
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Erreur lors de l'enregistrement de l'utilisateur.");
+  }
+});
+
+
+  
 
 // === MongoDB Connection and Server Start ===
 mongoose
