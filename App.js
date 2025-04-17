@@ -31,26 +31,41 @@ app.set('views', path.join(__dirname, 'views'));
 const User = require('./models/User');
 
 // === Routes ===
-app.get('/', (req, res) => res.render('index'));
+
+// 🔹 Page d'accueil
+
+
+// 🔹 Voir tous les utilisateurs en JSON
+app.get('/', async (req, res) => {
+  User.find()
+
+    .then((result)=>{
+      res.render('index',{arr:result})
+      console.log(result)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+});
+
+// 🔹 Pages statiques
 app.get('/user/add.html', (req, res) => res.render('user/add'));
 app.get('/user/view.html', (req, res) => res.render('user/view'));
 app.get('/user/edit.html', (req, res) => res.render('user/edit'));
-//post
+
+// 🔹 Ajouter un utilisateur (formulaire)
 app.post('/user/add.html', async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    res.redirect('/user/view.html'); // ou une autre page
+    res.redirect('/user/view.html');
   } catch (error) {
-    console.error(error);
+    console.error("❌ Erreur ajout utilisateur :", error);
     res.status(500).send("Erreur lors de l'enregistrement de l'utilisateur.");
   }
 });
 
-
-  
-
-// === MongoDB Connection and Server Start ===
+// === Connexion MongoDB et lancement du serveur ===
 mongoose
   .connect('mongodb+srv://haytam1331:bOFbsZlIOBnoGSAY@cluster0.5uydnqq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => {
