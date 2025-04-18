@@ -65,6 +65,20 @@ app.post('/user/add.html', async (req, res) => {
   }
 });
 
+// 🔹 Get user id
+app.get("/user/:id", (req, res) => {
+  User.findById(req.params.id)
+    .then((result) => {
+      console.log(result);
+      res.render('user/view', { arr: result });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Server Error");
+    });
+});
+
+
 // === Connexion MongoDB et lancement du serveur ===
 mongoose
   .connect('mongodb+srv://haytam1331:bOFbsZlIOBnoGSAY@cluster0.5uydnqq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
