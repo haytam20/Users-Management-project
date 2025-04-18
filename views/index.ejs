@@ -78,8 +78,7 @@
           <td><%= element.Gender %></td>
           <td><%= element.Country %></td>
           <td><%= element.Age %></td>
-          <td>2 days ago
-          </td>
+          <td><%= moment(element.updatedAt).startOf('hour').fromNow(); %></td>
           <td>
             <a
               data-bs-toggle="tooltip"

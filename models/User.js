@@ -12,7 +12,7 @@ const UserSchema = new Schema({
   Telephone: Number,
  
  
-});
+},{timestamps:true});
  
  
 // Create a model based on that schema
