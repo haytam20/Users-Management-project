@@ -76,7 +76,7 @@
           <div class="col-md-6">
             <label for="inputfirstName4" class="form-label">First Name:</label>
             <input
-              placeholder="Ali..."
+              value="<%= arr.FirstName %>"
               type="text"
               class="form-control"
               id="inputfirstName4"
@@ -85,7 +85,7 @@
           <div class="col-md-6">
             <label for="inputlastName4" class="form-label">Last Name:</label>
             <input
-              placeholder="Hassan..."
+             value="<%= arr.LastName %>"
               type="text"
               class="form-control"
               id="inputlastName4"
@@ -95,7 +95,7 @@
           <div class="col-md-6">
             <label for="inputemail4" class="form-label">Email:</label>
             <input
-              placeholder="ali@gmail.com"
+              value="<%= arr.Email %>"
               type="email"
               class="form-control"
               id="inputemail4"
@@ -104,7 +104,7 @@
           <div class="col-md-6">
             <label for="inputtele4" class="form-label">Telephone:</label>
             <input
-              placeholder="011987899"
+              value="<%= arr.Telephone %>"
               type="number"
               class="form-control"
               id="inputtele4"
@@ -115,7 +115,7 @@
             <div class="col-md-6">
               <label for="inputage4" class="form-label">Age:</label>
               <input
-                placeholder="Your Age: ..."
+                value="<%= arr.Age %>"
                 type="number"
                 class="form-control"
                 id="inputage4"
@@ -126,11 +126,24 @@
           <div>
             <div class="col-md-6">
               <label for="inputCountry" class="form-label">Country:</label>
-              <select id="inputCountry" class="form-select">
-                <option selected hidden disabled>Choose here ...</option>
-
+              <select name="Country" id="inputCountry" class="form-select">
+                <option selected hidden disabled><%= arr.Country%></option>
                 <option>Morocco</option>
-                <option>Egypt</option>
+                <option>Germany</option>
+                <%  const Country = [
+                "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium",
+                "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic",
+                "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece",
+                "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Kosovo", "Latvia",
+                "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco",
+                "Montenegro", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal",
+                "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain",
+                "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City"
+              ];
+               %>
+                <% Country.forEach(element => { %>
+                  <option><%= element %></option>
+                <% }) %>
               </select>
             </div>
           </div>
@@ -139,7 +152,7 @@
             <div class="col-md-6">
               <label for="inputGender" class="form-label">Gender:</label>
               <select id="inputGender" class="form-select">
-                <option selected hidden disabled>Choose here ...</option>
+                <option selected hidden disabled><%= arr.Gender%></option>
                 <option>Male</option>
                 <option>Female</option>
               </select>
