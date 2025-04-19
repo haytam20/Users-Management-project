@@ -5,9 +5,10 @@ const livereload = require('livereload');
 const connectLivereload = require('connect-livereload');
 //moment
 var moment = require('moment'); // require
-; 
+//override
+var methodOverride = require('method-override')
 
-//port
+// Initialize app first
 const app = express();
 const port = 3002;
 
@@ -27,6 +28,9 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Add methodOverride middleware after app initialization
+app.use(methodOverride('_method'));
+
 // === EJS View Engine ===
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +44,7 @@ const User = require('./models/User');
 app.get('/', async (req, res) => {
   User.find()
     .then((result) => {
-      res.render('index', { arr: result,moment:moment });
+      res.render('index', { arr: result, moment: moment });
     })
     .catch((err) => {
       console.log(err);
@@ -52,7 +56,16 @@ app.get('/', async (req, res) => {
 app.get('/user/add.html', (req, res) => res.render('user/add'));
 
 // 🔹 Formulaire d'édition (à compléter si nécessaire)
-app.get('/user/edit.html', (req, res) => res.render('user/edit'));
+app.get("/edit/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id); // get user data
+    if (!user) return res.status(404).send("Utilisateur non trouvé.");
+    res.render("user/edit", { arr: user }); // pass it to EJS
+  } catch (err) {
+    console.error("❌ Erreur récupération utilisateur :", err);
+    res.status(500).send("Erreur serveur.");
+  }
+});
 
 // 🔹 Ajouter un utilisateur
 app.post('/user/add.html', async (req, res) => {
@@ -67,7 +80,7 @@ app.post('/user/add.html', async (req, res) => {
 });
 
 // 🔹 Voir un utilisateur spécifique (IMPORTANT : route dynamique avec id)
-app.get("/user/:id", (req, res) => {
+app.get("/view/:id", (req, res) => {
   User.findById(req.params.id)
     .then((result) => {
       if (!result) return res.status(404).send("Utilisateur non trouvé.");
@@ -78,6 +91,20 @@ app.get("/user/:id", (req, res) => {
       res.status(500).send("Erreur serveur.");
     });
 });
+
+// 🔹 Supprimer un utilisateur
+app.delete("/delete/:id", async (req, res) => {
+  try {
+    const result = await User.findByIdAndDelete(req.params.id);
+    res.redirect("/");  // Redirect after deletion
+
+    console.log(result);  // Log the result of the deletion
+  } catch (err) {
+    console.error("❌ Erreur suppression utilisateur :", err);
+    res.status(500).send("Erreur lors de la suppression de l'utilisateur.");
+  }
+});
+
 
 // === Connexion MongoDB et lancement du serveur ===
 mongoose
