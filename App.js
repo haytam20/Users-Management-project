@@ -105,6 +105,27 @@ app.delete("/delete/:id", async (req, res) => {
   }
 });
 
+// 🔹 Mettre à jour un utilisateur (mettre à jour avec PUT)
+app.put('/edit/:id', async (req, res) => {
+  try {
+    const userId = req.params.id; // Récupérer l'ID de l'utilisateur depuis les paramètres de l'URL
+    const updatedData = req.body; // Récupérer les données mises à jour du formulaire
+
+    // Mettre à jour l'utilisateur dans la base de données
+    const user = await User.findByIdAndUpdate(userId, updatedData, { new: true });
+
+    if (!user) {
+      return res.status(404).send("Utilisateur non trouvé.");
+    }
+
+    // Rediriger vers la page de l'utilisateur mis à jour
+    res.redirect(`/view/${user._id}`);
+  } catch (error) {
+    console.error("❌ Erreur lors de la mise à jour de l'utilisateur :", error);
+    res.status(500).send("Erreur lors de la mise à jour de l'utilisateur.");
+  }
+});
+
 
 // === Connexion MongoDB et lancement du serveur ===
 mongoose

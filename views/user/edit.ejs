@@ -6,7 +6,7 @@
       rel="stylesheet"
       href="../bootstrap-icons-1.10.5/font/bootstrap-icons.min.css"
     />
-    <link rel="shortcut icon" href="../img/ali.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/ali.png" type="image/x-icon" />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,9 +20,8 @@
 
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
 
-    
-      <!-- style css -->
-<link rel="stylesheet" href="../css/dark-mood.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="../css/dark-mood.css" />
 
     <!-- Custom styles for this template -->
     <link href="../css/sidebars.css" rel="stylesheet" />
@@ -49,30 +48,30 @@
     </svg>
 
     <main class="d-flex flex-nowrap">
-      <%- include('../Components/sidebar.ejs',{currentPage:'edit'}) %>
+      <%- include('../Components/sidebar.ejs', { currentPage: 'edit' }) %>
 
       <section class="w-100">
-      <!-- nav -->
-      <%- include('../components/nav.ejs') %>
+        <!-- nav -->
+        <%- include('../components/nav.ejs') %>
 
-        <nav class="px-2 mt-4 d-flex flex-wrap justify-content-between" aria-label="breadcrumb">
+        <nav
+          class="px-2 mt-4 d-flex flex-wrap justify-content-between"
+          aria-label="breadcrumb"
+        >
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Ali Hassan</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Ali Hassan
+            </li>
           </ol>
 
-
-          <p class="me-md-5"> <span class="fw-medium fs-6">Id :</span> 6487021520bcf1af6319484c</p>
+          <p class="me-md-5">
+            <span class="fw-medium fs-6">Id :</span> 6487021520bcf1af6319484c
+          </p>
         </nav>
 
-
-
-
-
-
-
-
-        <form class="mx-0 row gx-3 gy-4 mt-2">
+        <form action="/edit/<%= arr._id %>?_method=PUT" method="POST" class="mx-0 row gx-3 gy-4 mt-2">
+          
           <div class="col-md-6">
             <label for="inputfirstName4" class="form-label">First Name:</label>
             <input
@@ -80,15 +79,17 @@
               type="text"
               class="form-control"
               id="inputfirstName4"
+              name="FirstName" 
             />
           </div>
           <div class="col-md-6">
             <label for="inputlastName4" class="form-label">Last Name:</label>
             <input
-             value="<%= arr.LastName %>"
+              value="<%= arr.LastName %>"
               type="text"
               class="form-control"
               id="inputlastName4"
+              name="LastName" 
             />
           </div>
 
@@ -99,6 +100,7 @@
               type="email"
               class="form-control"
               id="inputemail4"
+              name="Email" 
             />
           </div>
           <div class="col-md-6">
@@ -108,55 +110,51 @@
               type="number"
               class="form-control"
               id="inputtele4"
+              name="Telephone" 
             />
           </div>
 
-          <div>
-            <div class="col-md-6">
-              <label for="inputage4" class="form-label">Age:</label>
-              <input
-                value="<%= arr.Age %>"
-                type="number"
-                class="form-control"
-                id="inputage4"
-              />
-            </div>
+          <div class="col-md-6">
+            <label for="inputage4" class="form-label">Age:</label>
+            <input
+              value="<%= arr.Age %>"
+              type="number"
+              class="form-control"
+              id="inputage4"
+              name="Age" 
+            />
           </div>
 
-          <div>
-            <div class="col-md-6">
-              <label for="inputCountry" class="form-label">Country:</label>
-              <select name="Country" id="inputCountry" class="form-select">
-                <option selected hidden disabled><%= arr.Country%></option>
-                <option>Morocco</option>
-                <option>Germany</option>
-                <%  const Country = [
-                "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium",
-                "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic",
-                "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece",
-                "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Kosovo", "Latvia",
-                "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco",
-                "Montenegro", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal",
-                "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain",
-                "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City"
-              ];
-               %>
-                <% Country.forEach(element => { %>
-                  <option><%= element %></option>
-                <% }) %>
-              </select>
-            </div>
+          <div class="col-md-6">
+            <label for="inputCountry" class="form-label">Country:</label>
+            <select name="Country" id="inputCountry" class="form-select">
+              <option selected hidden disabled><%= arr.Country %></option>
+              <option>Morocco</option>
+              <option>Germany</option>
+              <% const countries = [
+                "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", 
+                "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", 
+                "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Georgia", 
+                "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", 
+                "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", 
+                "Moldova", "Monaco", "Montenegro", "Netherlands", "North Macedonia", "Norway", 
+                "Poland", "Portugal", "Romania", "Russia", "San Marino", "Serbia", "Slovakia", 
+                "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", 
+                "Vatican City"
+              ]; %>
+              <% countries.forEach(function(country) { %>
+                <option><%= country %></option>
+              <% }); %>
+            </select>
           </div>
 
-          <div>
-            <div class="col-md-6">
-              <label for="inputGender" class="form-label">Gender:</label>
-              <select id="inputGender" class="form-select">
-                <option selected hidden disabled><%= arr.Gender%></option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-            </div>
+          <div class="col-md-6">
+            <label for="inputGender" class="form-label">Gender:</label>
+            <select name="Gender"  id="inputGender" class="form-select">
+              <option selected hidden disabled><%= arr.Gender %></option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
           </div>
 
           <div class="col-12">
@@ -166,7 +164,7 @@
             <button
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              type="button"
+              type="submit"
               class="btn btn-danger"
             >
               Delete Customer
@@ -196,7 +194,9 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">Are you sure you want to continue delete the customer?</div>
+            <div class="modal-body">
+              Are you sure you want to continue delete the customer?
+            </div>
             <div class="modal-footer">
               <button
                 type="button"
@@ -205,18 +205,19 @@
               >
                 Close
               </button>
-              <form action="/delete/<%= arr._id %>?_method=DELETE" method="POST">
-              <button type="submit" class="btn btn-danger">
-                  Delete
-                </button>
+              <form
+                action="/delete/<%= arr._id %>?_method=DELETE"
+                method="POST"
+              >
+                <button type="submit" class="btn btn-danger">Delete</button>
               </form>
             </div>
           </div>
         </div>
       </div>
     </main>
-    <script src="../js/bootstrap.bundle.min.js"></script>
 
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/sidebars.js"></script>
     <script src="../js/main.js"></script>
   </body>

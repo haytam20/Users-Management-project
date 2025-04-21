@@ -6,7 +6,7 @@
       rel="stylesheet"
       href="../bootstrap-icons-1.10.5/font/bootstrap-icons.min.css"
     />
-    <link rel="shortcut icon" href="../img/me.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/me.jpg" type="image/x-icon" />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,8 +20,8 @@
 
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
 
-      <!-- style css -->
-<link rel="stylesheet" href="../css/dark-mood.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="../css/dark-mood.css" />
 
     <!-- Custom styles for this template -->
     <link href="../css/sidebars.css" rel="stylesheet" />
@@ -53,11 +53,15 @@
       <section class="w-100">
         <%- include('../components/nav.ejs') %>
 
-        <form action="/user/add.html" method="post" class="mx-0 row gx-3 gy-4 mt-3">
+        <form
+          action="/user/add.html"
+          method="post"
+          class="mx-0 row gx-3 gy-4 mt-3"
+        >
           <div class="col-md-6">
             <label for="inputfirstName4" class="form-label">First Name:</label>
             <input
-             name="FirstName"
+              name="FirstName"
               placeholder="Name."
               type="text"
               class="form-control"
@@ -116,20 +120,26 @@
                 <option selected hidden disabled>Choose here ...</option>
                 <option>Morocco</option>
                 <option>Germany</option>
-                <%  const Country = [
-                "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium",
-                "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic",
-                "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece",
-                "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Kosovo", "Latvia",
-                "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco",
-                "Montenegro", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal",
-                "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain",
-                "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City"
-              ];
-               %>
-                <% Country.forEach(element => { %>
-                  <option><%= element %></option>
-                <% }) %>
+                <% 
+                const Country = [ 
+                  "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", 
+                  "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia", 
+                  "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", 
+                  "France", "Georgia", "Germany", "Greece", "Hungary", "Iceland", 
+                  "Ireland", "Italy", "Kazakhstan", "Kosovo", "Latvia", "Liechtenstein", 
+                  "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro", 
+                  "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal", 
+                  "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", 
+                  "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", 
+                  "Vatican City" 
+                ]; 
+
+                Country.forEach(element => { 
+                %>
+                    <option><%= element %></option>
+                <% 
+                }); 
+                %>
               </select>
             </div>
           </div>
